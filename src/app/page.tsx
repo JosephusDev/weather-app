@@ -4,12 +4,13 @@ import { WeatherCard } from '@/components/WeatherCard';
 import { WeatherData } from '@/types';
 import axios from 'axios';
 import { LoaderCircle } from 'lucide-react';
+import { api } from '@/services/api';
 
 const cities = [
     { name: 'Uíge', lat: -7.6117323, lon: 15.0563515 },
     { name: 'Negage', lat: -7.756449954932059, lon: 15.272969749921609 },
     { name: 'Damba', lat: -6.69199219698794, lon: 15.139439293107937 },
-    { name: 'Maquela do Zombo', lat: -6.053409067403904, lon: 15.106882787623066 },
+    { name: 'Maquela', lat: -6.053409067403904, lon: 15.106882787623066 },
     { name: 'Buengas', lat: -6.578177492387895, lon: 15.81781058263296 },
 ];
 
@@ -24,9 +25,7 @@ function Home() {
         setError(null);
 
         try {
-            const response = await axios.get(
-                `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=pt&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API}`
-            );
+            const response = await api.get(`weather?lat=${lat}&lon=${lon}`)
 
             console.log(response.data);
 
@@ -57,9 +56,16 @@ function Home() {
     };
 
     useEffect(() => {
-        // Carregar os dados da cidade selecionada por padrão
         fetchWeatherData(selectedCity.lat, selectedCity.lon);
-    }, [selectedCity]); // Executar sempre que a cidade selecionada mudar
+    }, [selectedCity])
+
+/*     useEffect(() => {
+        const intervalId = setInterval(() => {
+            fetchWeatherData(selectedCity.lat, selectedCity.lon);
+        }, 2 * 60 * 1000)
+
+        return () => clearInterval(intervalId);
+    }, []); */
 
     const handleCityChange = (lat: number, lon: number) => {
         const city = cities.find(city => city.lat === lat && city.lon === lon);

@@ -12,7 +12,7 @@ export const getBackgroundColor = (condition: string) => {
 export const translateCondition = (condition: string) => {
     switch (condition.toLowerCase()) {
         case 'clear': return 'Céu limpo';
-        case 'clouds': return 'Nublado';
+        case 'clouds': return 'Nuvens';
         case 'rain': return 'Chuva';
         case 'snow': return 'Neve';
         case 'thunderstorm': return 'Tempestade';

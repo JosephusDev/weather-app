@@ -1,7 +1,8 @@
 "use client";
 import React from 'react';
 import { WeatherData } from '@/types';
-import { format } from 'date-fns';
+import { format, formatDistanceToNow } from 'date-fns';
+import { ptBR } from "date-fns/locale";
 import { getBackgroundColor, translateCondition } from '@/utils';
 import Image from 'next/image';
 
@@ -13,9 +14,11 @@ interface WeatherCardProps {
 }
 
 export const WeatherCard: React.FC<WeatherCardProps> = ({ data, cities, selectedCity, onCityChange }) => {
-    const date = format(new Date(data.dt * 1000), 'dd/MM/yyyy');
+    const date = format(new Date(data.dt * 1000), "dd 'de' MMM ' de' yyyy", { locale: ptBR })
+    const date_distance = formatDistanceToNow(new Date(data.dt * 1000), { addSuffix: true, locale: ptBR })
     const temperature = Math.round(data.main.temp - 273.15);
     const condition = data.weather[0].main;
+    const description = data.weather[0].description;
     const maxTemp = Math.round(data.main.temp_max - 273.15);
     const minTemp = Math.round(data.main.temp_min - 273.15);
     const humidity = data.main.humidity;
@@ -41,7 +44,8 @@ export const WeatherCard: React.FC<WeatherCardProps> = ({ data, cities, selected
                     <select
                         value={selectedCity}
                         onChange={handleCityChange}
-                        className="px-2 py-2 text-white focus:text-black focus:outline-none"
+                        className="py-2 text-white focus:text-black focus:outline-none bg-transparent"
+                        style={{ width: `${selectedCity.length + 3}ch` }}
                     >
                         {cities.map((city) => (
                             <option key={city.name} value={city.name}>
@@ -50,7 +54,7 @@ export const WeatherCard: React.FC<WeatherCardProps> = ({ data, cities, selected
                         ))}
                     </select>
                 </div>
-                <div className="flex items-center">
+                <div className="flex flex-col items-center">
                     <span className="text-lg mr-2">{translatedCondition}</span>
                 </div>
             </div>
@@ -63,6 +67,7 @@ export const WeatherCard: React.FC<WeatherCardProps> = ({ data, cities, selected
                 <img src={iconUrl} alt={condition} />
                 <p className="text-6xl font-bold">{temperature}°</p>
                 <p className="text-sm">Max.: {maxTemp}° Min.: {minTemp}°</p>
+                <p className="text-sm">{description}</p>
             </div>
 
             <div className="flex justify-around mt-4">
@@ -72,11 +77,12 @@ export const WeatherCard: React.FC<WeatherCardProps> = ({ data, cities, selected
                 </div>
                 <div className="text-center">
                     <p className="text-sm">Vento</p>
-                    <p className="text-lg font-bold">{windSpeed} km/h</p>
+                    <p className="text-lg font-bold">{windSpeed} m/s</p>
                 </div>
             </div>
 
             <div className="mt-4 text-center">
+                <span className="text-sm">Última atualização: {date_distance}</span>
                 <h2 className="text-lg font-bold">{date}</h2>
             </div>
         </div>
