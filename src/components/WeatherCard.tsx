@@ -13,17 +13,23 @@ interface WeatherCardProps {
   selectedCity: string
 }
 
-export const WeatherCard: React.FC<WeatherCardProps> = ({
-  data,
-  cities,
-  selectedCity,
-}) => {
+export function WeatherCard({ data, cities, selectedCity }: WeatherCardProps) {
   const router = useRouter()
 
-  const handleCityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleCityChange = async (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
     const selectedCity = cities.find(city => city.name === event.target.value)
     if (selectedCity) {
-      // Redireciona para a nova URL com lat e lon
+      const response = await fetch('/api/weather', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          lat: selectedCity.lat,
+          lon: selectedCity.lon,
+        }),
+      })
+
       router.push(`/${selectedCity.lat}/${selectedCity.lon}`)
     }
   }

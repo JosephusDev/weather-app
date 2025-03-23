@@ -1,4 +1,5 @@
 import { WeatherCard } from '@/components/WeatherCard'
+import { fetchWeatherData } from '@/services/api'
 import { WeatherData } from '@/types'
 
 const cities = [
@@ -30,23 +31,7 @@ export default async function CoordinatesPage({
     cities.find(city => city.lat === latitude && city.lon === longitude) ||
     cities[0]
 
-  console.log('Requisição à API feita para:', selectedCity.name)
-
-  // Faz a requisição à API com cache de 5 minutos
-  const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${selectedCity.lat}&lon=${selectedCity.lon}&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_API}&lang=pt`,
-    {
-      next: {
-        revalidate: 300, // Cache de 5 minutos (300 segundos)
-      },
-    },
-  )
-
-  if (!response.ok) {
-    throw new Error('Erro ao buscar dados do clima')
-  }
-
-  const data = await response.json()
+  const data = await fetchWeatherData(selectedCity.lat, selectedCity.lon)
 
   const weatherData: WeatherData = {
     coord: data.coord,
