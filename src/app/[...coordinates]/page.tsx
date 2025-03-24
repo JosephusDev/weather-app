@@ -1,5 +1,5 @@
 import { WeatherCard } from '@/components/WeatherCard'
-import { fetchWeatherData } from '@/services/api'
+import { fetchWeatherData, fetchWeatherForecast } from '@/services/api'
 import { WeatherData } from '@/types'
 
 const cities = [
@@ -32,6 +32,10 @@ export default async function CoordinatesPage({
     cities[0]
 
   const data = await fetchWeatherData(selectedCity.lat, selectedCity.lon)
+  const forecasts = await fetchWeatherForecast(
+    selectedCity.lat,
+    selectedCity.lon,
+  )
 
   const weatherData: WeatherData = {
     coord: data.coord,
@@ -54,6 +58,7 @@ export default async function CoordinatesPage({
     <div className='flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-blue-700 to-blue-400 text-white font-[family-name:var(--font-geist-sans)] p-4'>
       <WeatherCard
         data={weatherData}
+        forecasts={forecasts.list}
         cities={cities}
         selectedCity={selectedCity.name}
       />

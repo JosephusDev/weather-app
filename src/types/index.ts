@@ -29,6 +29,7 @@ export interface Wind {
 
 export interface Rain {
   '1h': number
+  '3h': number
 }
 
 export interface Clouds {
@@ -53,6 +54,7 @@ export interface WeatherData {
   rain?: Rain
   clouds?: Clouds
   dt: number
+  dt_txt?: string
   sys: Sys
   timezone: number
   id: number
