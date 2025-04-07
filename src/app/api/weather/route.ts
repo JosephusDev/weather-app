@@ -1,31 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
-import { fetchWeatherData, fetchWeatherForecast } from '@/services/api'
 import { WeatherParams } from '@/types'
 
 // Armazenamento temporário para controle da última atualização
 const lastUpdatedCache: Record<string, number> = {} // Exemplo: { 'lat_lon': timestamp }
-
-// Rota GET — Busca os dados da API de clima
-/* 
-export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url)
-  const lat = searchParams.get('lat')
-  const lon = searchParams.get('lon')
-
-  if (!lat || !lon) {
-    return NextResponse.json({ error: 'Parâmetros inválidos' }, { status: 400 })
-  }
-
-  const weather = await fetchWeatherData(Number(lat), Number(lon))
-  const forecasts = await fetchWeatherForecast(Number(lat), Number(lon))
-  const data = {
-    weather,
-    forecasts,
-  }
-
-  return NextResponse.json(data)
-} */
 
 // Rota POST — Verifica se já passou 5 minutos antes de revalidar
 export async function POST(request: NextRequest) {
