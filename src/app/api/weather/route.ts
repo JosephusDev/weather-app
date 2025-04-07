@@ -23,6 +23,7 @@ export async function POST(request: NextRequest) {
     lastUpdatedCache[cacheKey] &&
     currentTime - lastUpdatedCache[cacheKey] < 120_000
   ) {
+    console.log('Cache ainda válido, não foi revalidado.')
     return NextResponse.json({
       success: false,
       message: 'Cache ainda válido, não foi revalidado.',
@@ -34,7 +35,7 @@ export async function POST(request: NextRequest) {
 
   // Força a revalidação do cache
   await revalidatePath(`/${body.lat}/${body.lon}`)
-
+  console.log('Cache revalidado com sucesso!')
   return NextResponse.json({
     success: true,
     message: 'Cache revalidado com sucesso!',

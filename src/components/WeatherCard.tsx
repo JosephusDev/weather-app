@@ -8,7 +8,7 @@ import {
   kelvinToCelsius,
   translateCondition,
 } from '@/utils'
-import { format, formatDistanceToNow } from 'date-fns'
+import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { Loader } from 'lucide-react'
 import { ForecastsCard } from './ForecastsCard'
@@ -117,11 +117,6 @@ export function WeatherCard({
               locale: ptBR,
             })}
           </span>
-          {/*           <h2 className='text-lg font-bold'>
-            {format(new Date(data.dt * 1000), "dd 'de' MMM ' de' yyyy", {
-              locale: ptBR,
-            })}
-          </h2> */}
         </div>
       </div>
       <div
