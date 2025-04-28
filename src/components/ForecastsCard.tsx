@@ -38,14 +38,14 @@ export function ForecastsCard({ data }: { data: WeatherData[] }) {
       </div>
       <div className='flex justify-center gap-2 mt-4'>
         <button
-          className='px-4 py-2 bg-blue-500 text-white rounded-lg disabled:opacity-50'
+          className='px-4 py-2 bg-blue-500 text-white rounded-xl disabled:opacity-50'
           onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
         >
           <ChevronLeft size={20} />
         </button>
         <button
-          className='px-4 py-2 bg-blue-500 text-white rounded-lg disabled:opacity-50'
+          className='px-4 py-2 bg-blue-500 text-white rounded-xl disabled:opacity-50'
           onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
           disabled={currentPage === totalPages}
         >

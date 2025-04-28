@@ -11,9 +11,9 @@ const cities = [
 ]
 
 interface CoordinatesPageProps {
-  params: {
+  params: Promise<{
     coordinates: string[]
-  }
+  }>
 }
 
 export default async function CoordinatesPage({
@@ -31,7 +31,6 @@ export default async function CoordinatesPage({
     cities.find(city => city.lat === latitude && city.lon === longitude) ||
     cities[0]
 
-  console.log('atualizou')
   const data = await fetchWeatherData(selectedCity.lat, selectedCity.lon)
   const forecasts = await fetchWeatherForecast(
     selectedCity.lat,

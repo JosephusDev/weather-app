@@ -10,7 +10,7 @@ import {
 } from '@/utils'
 import { formatDistanceToNow } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
-import { Loader } from 'lucide-react'
+import { Loader2 } from 'lucide-react'
 import { ForecastsCard } from './ForecastsCard'
 
 interface WeatherCardProps {
@@ -36,20 +36,11 @@ export function WeatherCard({
     if (selectedCity) {
       setIsLoading(true) // Ativa o loading
 
-      await fetch('/api/weather', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          lat: selectedCity.lat,
-          lon: selectedCity.lon,
-        }),
-      })
-
       router.push(`/${selectedCity.lat}/${selectedCity.lon}`)
     }
   }
 
-  if (isLoading) return <Loader className='animate-spin' />
+  if (isLoading) return <Loader2 className='animate-spin' />
 
   return (
     <div className='flex flex-col sm:flex-row items-center justify-center gap-5 w-full'>

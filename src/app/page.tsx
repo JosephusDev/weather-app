@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Loader } from 'lucide-react'
+import { Loader2 } from 'lucide-react'
 
 export default function Home() {
   const router = useRouter()
@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <div className='flex flex-col justify-center items-center min-h-screen bg-gradient-to-br from-blue-700 to-blue-400 text-white font-[family-name:var(--font-geist-sans)] p-4'>
-      <Loader className='animate-spin' size={30} />
+      <Loader2 className='animate-spin' size={30} />
     </div>
   )
 }
