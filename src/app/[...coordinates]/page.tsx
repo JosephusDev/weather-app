@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic'
+export const revalidate = 60 // Revalida a cada 60 segundos
 
 import { WeatherCard } from '@/components/WeatherCard'
 import { fetchWeatherData, fetchWeatherForecast } from '@/services/api'
