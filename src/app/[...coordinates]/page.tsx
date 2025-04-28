@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { WeatherCard } from '@/components/WeatherCard'
 import { fetchWeatherData, fetchWeatherForecast } from '@/services/api'
 import { WeatherData } from '@/types'
