@@ -6,10 +6,16 @@ import { WeatherData } from '@/types'
 
 const cities = [
   { name: 'Uíge', lat: -7.6117323, lon: 15.0563515 },
-  { name: 'Negage', lat: -7.756449954932059, lon: 15.272969749921609 },
-  { name: 'Damba', lat: -6.69199219698794, lon: 15.139439293107937 },
-  { name: 'Maquela', lat: -6.053409067403904, lon: 15.106882787623066 },
+  { name: 'Bembe', lat: -7.032648017304998, lon: 14.29674820182225 },
+  { name: 'Bungo', lat: -7.436525981499463, lon: 15.391911280071882 },
   { name: 'Buengas', lat: -6.578177492387895, lon: 15.81781058263296 },
+  { name: 'Damba', lat: -6.688930174977665, lon: 15.231392655577384 },
+  { name: 'Macocola', lat: -7.010713067729179, lon: 16.258614223936732 },
+  { name: 'Maquela do Zombo', lat: -6.04473818547958, lon: 15.313790086747998 },
+  { name: 'Negage', lat: -7.762473217164058, lon: 15.473091827295704 },
+  { name: 'Quimbele', lat: -6.516504732458214, lon: 16.21629226615331 },
+  { name: 'Quitexe', lat: -7.943119162500933, lon: 15.057965715478044 },
+  { name: 'Songo', lat: -7.352433829153458, lon: 14.857027089728163 },
 ]
 
 interface CoordinatesPageProps {
